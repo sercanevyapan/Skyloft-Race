@@ -784,7 +784,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 309578076}
   m_LocalRotation: {x: 0.18964185, y: -0.18964185, z: -0.6812018, w: 0.6812019}
-  m_LocalPosition: {x: -41.64647, y: -0.64648426, z: 557.1289}
+  m_LocalPosition: {x: -42.87, y: -0.65, z: 556.39}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1580,7 +1580,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 864285626}
   m_LocalRotation: {x: 0.08544918, y: -0.08544918, z: -0.7019248, w: 0.7019248}
-  m_LocalPosition: {x: 37.87836, y: -0.64648426, z: 1018.5791}
+  m_LocalPosition: {x: 33.4, y: -0.6, z: 1017.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2082,7 +2082,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1131332284}
   m_LocalRotation: {x: 0.016242199, y: -0.016242199, z: -0.7069202, w: 0.7069202}
-  m_LocalPosition: {x: -74.48844, y: -0.64648426, z: 650.51666}
+  m_LocalPosition: {x: -72.58, y: -0.65, z: 650.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2281,7 +2281,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1194512338}
   m_LocalRotation: {x: -0.04113019, y: 0.04113019, z: -0.70590955, w: 0.70590955}
-  m_LocalPosition: {x: 44.186604, y: -0.64648426, z: 919.2847}
+  m_LocalPosition: {x: 47.1, y: -0.6, z: 918.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3236,7 +3236,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1556467880}
   m_LocalRotation: {x: -0.0021325843, y: 0.0021325843, z: -0.7071036, w: 0.70710355}
-  m_LocalPosition: {x: 0.2878011, y: -0.64648426, z: 184.19571}
+  m_LocalPosition: {x: 2.84, y: -0.65, z: 184.18}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5807,7 +5807,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rbPlayer: {fileID: 1529197495}
   pathFollower: {fileID: 1529197494}
-  playerSwerveSpeed: 2
+  playerSwerveSpeed: 1
   maxSwerveAmount: 5
   rotateSpeed: 2
   rotateAngle: 60
