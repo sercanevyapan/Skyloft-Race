@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace PathCreation.Examples
 {
@@ -8,10 +9,10 @@ namespace PathCreation.Examples
     {
         public PathCreator pathCreator;
         public EndOfPathInstruction endOfPathInstruction;
-        public float speed;
+        public float speed, crashSpeed;
         float distanceTravelled;
 
-        public bool RotationIgnore,isObstacleCrash;
+        public bool RotationIgnore, isObstacle;
 
         void Start() {
             if (pathCreator != null)
@@ -23,8 +24,9 @@ namespace PathCreation.Examples
 
         void Update()
         {
-            if (pathCreator != null && !isObstacleCrash)
+            if (pathCreator != null && !isObstacle)
             {
+
                 distanceTravelled += speed * Time.deltaTime;
                 transform.position = pathCreator.path.GetPointAtDistance(distanceTravelled, endOfPathInstruction);
 
@@ -43,8 +45,17 @@ namespace PathCreation.Examples
 
 
                 
+            }else if(pathCreator != null && isObstacle)
+            {
+                distanceTravelled -= crashSpeed * Time.deltaTime;
+                transform.position = pathCreator.path.GetPointAtDistance(distanceTravelled, endOfPathInstruction);
+              
             }
         }
+
+    
+
+
 
         // If the path changes during the game, update the distance travelled so that the follower's position on the new path
         // is as close as possible to its position on the old path
@@ -52,15 +63,7 @@ namespace PathCreation.Examples
             distanceTravelled = pathCreator.path.GetClosestDistanceAlongPath(transform.position);
         }
 
-        //private void OnTriggerEnter(Collider other)
-        //{
-        //    if (other.CompareTag("Obstacle"))
-        //    {
-        //        isObstacleCrash = true;
-        //        print("crash");
-
-        //    }
-        //}
+     
 
     }
 }

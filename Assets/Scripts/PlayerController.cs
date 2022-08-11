@@ -5,20 +5,62 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    private float lastFingerPos;
-    private float moveX;
-    public float playerSwerveSpeed;
-    public float maxSwerveAmount=5;
-    public float rotateSpeed;
-    public bool isRightCurve, isLeftCurve, isReverse,isCrash;
+    enum State
+    {
+        LeftCurveEnter,
+        LeftCurveExit,
+        RightCurveEnter,
+        RightCurveExit,
+        Obstacle
+    }
 
+    private State _state;
 
-    public float rotateAngle;
-    private Vector3 newPos = Vector3.zero;
-    [SerializeField] Rigidbody _rbPathFollower;
-    public float m_Thrust = 20f;
+    private void ChangeState(State newState)
+    {
+        _state = newState;
+
+        switch (newState)
+        {
+            case State.LeftCurveEnter:
+                isLeftCurve = true;
+                isReverse = false;
+                break;
+
+            case State.LeftCurveExit:
+                isLeftCurve = false;
+                isReverse = true;
+                break;
+
+            case State.RightCurveEnter:
+                isRightCurve = true;
+                isReverse = false;
+                break;
+
+            case State.RightCurveExit:
+                isRightCurve = false;
+                isReverse = true;
+                break;
+
+            case State.Obstacle:
+                pathFollower.isObstacle = true;
+                StartCoroutine(StopBackForce());
+                break;
+        }
+    }
+
+    [SerializeField] Rigidbody _rbPlayer;
     [SerializeField] PathCreation.Examples.PathFollower pathFollower;
 
+    private float lastFingerPos;
+    private float moveX;
+    private bool isRightCurve, isLeftCurve, isReverse;
+    private Vector3 newPos = Vector3.zero;
+    public float playerSwerveSpeed;
+    public float maxSwerveAmount = 5;
+    public float rotateSpeed;
+    public float rotateAngle;
+  
     void Update()
     {
 
@@ -41,20 +83,15 @@ public class PlayerController : MonoBehaviour
             PlayerRotateReverse();
         }
 
-      
 
     }
 
-    private void FixedUpdate()
+    private IEnumerator StopBackForce()
     {
-        if (isCrash)
-        {
-            _rbPathFollower.AddForce(0, 0, -1f);
-            print("crash");
-        }
+        yield return new WaitForSeconds(1);
+
+        pathFollower.isObstacle = false;
     }
-
-
 
     private void SwerveMovement()
     {
@@ -101,38 +138,34 @@ public class PlayerController : MonoBehaviour
     {
         if (other.CompareTag("RightCurve"))
         {
-            isRightCurve = true;
-            isReverse = false;
+            ChangeState(State.RightCurveEnter);
+          
         }
         if (other.CompareTag("LeftCurve"))
         {
-            isLeftCurve = true;
-            isReverse = false;
-        }
+            ChangeState(State.LeftCurveEnter);
 
+        }
         if (other.CompareTag("Obstacle"))
         {
-
-            isCrash = true;
-            pathFollower.isObstacleCrash = true;
-
+            ChangeState(State.Obstacle);
+         
         }
+
     }
 
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("RightCurve"))
         {
-            isRightCurve = false;
-            isReverse = true;
+            ChangeState(State.RightCurveExit);
+       
         }
         if (other.CompareTag("LeftCurve"))
         {
-            isLeftCurve = false;
-            isReverse = true;
+            ChangeState(State.LeftCurveExit);
+          
         }
     }
 
-
-  
 }
