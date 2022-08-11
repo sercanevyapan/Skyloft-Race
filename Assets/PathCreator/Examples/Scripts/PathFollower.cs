@@ -8,10 +8,10 @@ namespace PathCreation.Examples
     {
         public PathCreator pathCreator;
         public EndOfPathInstruction endOfPathInstruction;
-        public float speed = 5;
+        public float speed;
         float distanceTravelled;
 
-        public bool RotationIgnore;
+        public bool RotationIgnore,isObstacleCrash;
 
         void Start() {
             if (pathCreator != null)
@@ -23,7 +23,7 @@ namespace PathCreation.Examples
 
         void Update()
         {
-            if (pathCreator != null)
+            if (pathCreator != null && !isObstacleCrash)
             {
                 distanceTravelled += speed * Time.deltaTime;
                 transform.position = pathCreator.path.GetPointAtDistance(distanceTravelled, endOfPathInstruction);
@@ -51,5 +51,16 @@ namespace PathCreation.Examples
         void OnPathChanged() {
             distanceTravelled = pathCreator.path.GetClosestDistanceAlongPath(transform.position);
         }
+
+        //private void OnTriggerEnter(Collider other)
+        //{
+        //    if (other.CompareTag("Obstacle"))
+        //    {
+        //        isObstacleCrash = true;
+        //        print("crash");
+
+        //    }
+        //}
+
     }
 }
