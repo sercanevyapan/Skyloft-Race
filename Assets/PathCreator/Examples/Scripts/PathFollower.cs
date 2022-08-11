@@ -9,12 +9,14 @@ namespace PathCreation.Examples
     {
         public PathCreator pathCreator;
         public EndOfPathInstruction endOfPathInstruction;
-        public float speed, crashSpeed;
+        public  float speed;
+        public float maxSpeed, crashSpeed;
         float distanceTravelled;
 
-        public bool RotationIgnore, isObstacle;
+        public bool RotationIgnore, isObstacle,isSpeedIncease;
 
         void Start() {
+            speed = maxSpeed;
             if (pathCreator != null)
             {
                 // Subscribed to the pathUpdated event so that we're notified if the path changes during the game
@@ -49,7 +51,12 @@ namespace PathCreation.Examples
             {
                 distanceTravelled -= crashSpeed * Time.deltaTime;
                 transform.position = pathCreator.path.GetPointAtDistance(distanceTravelled, endOfPathInstruction);
-              
+                
+            }
+
+            if (isSpeedIncease)
+            {
+                SpeedIncrease();
             }
         }
 
@@ -63,7 +70,13 @@ namespace PathCreation.Examples
             distanceTravelled = pathCreator.path.GetClosestDistanceAlongPath(transform.position);
         }
 
-     
+         public void  SpeedIncrease()
+        {
+            if(speed<=maxSpeed)
+                speed += 10f* Time.deltaTime;
+
+            print(speed);
+        }
 
     }
 }

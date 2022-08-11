@@ -3288,9 +3288,11 @@ MonoBehaviour:
   pathCreator: {fileID: 2016200789}
   endOfPathInstruction: 2
   speed: 60
+  maxSpeed: 60
   crashSpeed: 15
   RotationIgnore: 1
   isObstacle: 0
+  isSpeedIncease: 0
 --- !u!54 &1529197495
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5884,11 +5886,7 @@ MonoBehaviour:
   playerSwerveSpeed: 2
   maxSwerveAmount: 5
   rotateSpeed: 2
-  m_Thrust: 1000
   rotateAngle: 60
-  isRightCurve: 0
-  isLeftCurve: 0
-  isReverse: 0
 --- !u!143 &919132149616669742
 CharacterController:
   m_ObjectHideFlags: 0

@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
         LeftCurveExit,
         RightCurveEnter,
         RightCurveExit,
+        SlowMovement,
         Obstacle
     }
 
@@ -44,10 +45,15 @@ public class PlayerController : MonoBehaviour
 
             case State.Obstacle:
                 pathFollower.isObstacle = true;
-                StartCoroutine(StopBackForce());
+                StartCoroutine(BackForce());
+                break;
+            case State.SlowMovement:
+                SlowMovement();
                 break;
         }
     }
+
+   
 
     [SerializeField] Rigidbody _rbPlayer;
     [SerializeField] PathCreation.Examples.PathFollower pathFollower;
@@ -86,11 +92,23 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    private IEnumerator StopBackForce()
+    private IEnumerator BackForce()
     {
         yield return new WaitForSeconds(1);
-
+        ChangeState(State.SlowMovement);
+        
+    }
+    private void SlowMovement()
+    {
         pathFollower.isObstacle = false;
+        pathFollower.speed = 10;
+        StartCoroutine(FastMovement());
+    }
+
+    private IEnumerator FastMovement()
+    {
+        yield return new WaitForSeconds(2);
+        pathFollower.isSpeedIncease = true;
     }
 
     private void SwerveMovement()
