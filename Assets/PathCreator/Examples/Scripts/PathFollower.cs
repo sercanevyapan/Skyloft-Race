@@ -40,10 +40,10 @@ namespace PathCreation.Examples
 
                     transform.rotation = newRot;
                 }
-                else
-                {
-                    transform.rotation = pathCreator.path.GetRotationAtDistance(distanceTravelled, endOfPathInstruction);
-                }
+                //else
+                //{
+                //    transform.rotation = pathCreator.path.GetRotationAtDistance(distanceTravelled, endOfPathInstruction);
+                //}
 
 
                 
@@ -51,7 +51,16 @@ namespace PathCreation.Examples
             {
                 distanceTravelled -= crashSpeed * Time.deltaTime;
                 transform.position = pathCreator.path.GetPointAtDistance(distanceTravelled, endOfPathInstruction);
-                
+
+                if (RotationIgnore)
+                {
+                    Quaternion newRot = pathCreator.path.GetRotationAtDistance(distanceTravelled, endOfPathInstruction);
+                    newRot.x = 0;
+                    newRot.z = 0;
+
+                    transform.rotation = newRot;
+                }
+
             }
 
             if (isSpeedIncease)
@@ -75,7 +84,7 @@ namespace PathCreation.Examples
             if(speed<=maxSpeed)
                 speed += 10f* Time.deltaTime;
 
-            print(speed);
+            
         }
 
     }

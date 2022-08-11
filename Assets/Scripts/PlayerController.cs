@@ -45,6 +45,9 @@ public class PlayerController : MonoBehaviour
 
             case State.Obstacle:
                 pathFollower.isObstacle = true;
+                isLeftCurve = false;
+                isRightCurve = false;
+                isReverse = true;
                 StartCoroutine(BackForce());
                 break;
             case State.SlowMovement:
